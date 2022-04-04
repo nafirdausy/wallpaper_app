@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wallpaper_app/data/data.dart';
 import 'package:wallpaper_app/model/categories_model.dart';
+import 'package:wallpaper_app/model/wallpaper_model.dart';
 import 'package:wallpaper_app/widgets/widget.dart';
 import 'package:http/http.dart' as http;
 
@@ -12,6 +13,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   
   List<CategorieModel> categories = new List();
+  List<WallpaperModel> wallpapers = new List();
 
   getTrendingWallpaper() async {
       await http.get(
@@ -85,7 +87,9 @@ class _HomeState extends State<Home> {
                   );
                 }
               ),
-            )
+            ),
+            SizedBox(height: 16,),
+            wallpapersList(wallpapers: wallpapers, context: context),
           ],
         ),
       ),
@@ -109,7 +113,10 @@ class CategoriesTile extends StatelessWidget {
             child: Image.network(imgUrl, height: 50, width: 100, fit: BoxFit.contain,)
           ),
           Container(
-            color: Colors.black26,
+            decoration: BoxDecoration(
+              color: Colors.black26,
+              borderRadius: BorderRadius.circular(8),
+            ),
             height: 50, 
             width: 100,
             alignment: Alignment.center,
@@ -120,3 +127,4 @@ class CategoriesTile extends StatelessWidget {
     );
   }
 }
+
